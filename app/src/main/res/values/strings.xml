@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AssessmentAppHPL</string>
+    <string name="phone_number">Phone number</string>
+    <string name="otp_send_message">We have just sent you 4 digit code to your Phone number %1$s. Please enter the otp below.</string>
 </resources>
