@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.registration.RegistrationActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user_name_lay"
+        style="@style/TextInputLayoutStyle"
+        android:hint="Name"
+        app:placeholderText="Enter your name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_name"
+            style="@style/EditTextStyle"
+            android:autofillHints="phone"
+            android:drawableStart="@drawable/ic_username"
+            android:drawablePadding="10dp"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_lay"
+        style="@style/TextInputLayoutStyle"
+        android:hint="Email"
+        app:placeholderText="Enter your email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            style="@style/EditTextStyle"
+            android:autofillHints="emailAddress"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="10dp"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phone_number_lay"
+        style="@style/TextInputLayoutStyle"
+        android:hint="@string/phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number"
+            style="@style/EditTextStyle"
+            android:autofillHints="phone"
+            android:clickable="false"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="10dp"
+            android:focusable="false"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Register" />
+</LinearLayout>

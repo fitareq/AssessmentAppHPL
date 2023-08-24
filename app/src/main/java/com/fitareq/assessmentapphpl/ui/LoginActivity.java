@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
                 binding.phoneNumberLay.setError("Phone must be at least 11 digit");
                 return;
             }
-            if (phone.contains("+88")) {
-                phone = phone.replace("+88", "");
+            if (!phone.contains("+88")) {
+                phone = "+88"+phone;
             }
 
             startActivity(new Intent(this, OtpActivity.class).putExtra("phone", phone));

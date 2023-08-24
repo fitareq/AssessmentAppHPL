@@ -1,8 +1,10 @@
-package com.fitareq.assessmentapphpl;
+package com.fitareq.assessmentapphpl.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.fitareq.assessmentapphpl.R;
 
 public class MainActivity extends AppCompatActivity {
 
