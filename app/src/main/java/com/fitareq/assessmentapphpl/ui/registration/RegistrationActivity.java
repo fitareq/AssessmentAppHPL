@@ -39,7 +39,7 @@ public class RegistrationActivity extends BaseActivity {
                 case SUCCESS -> {
                     saveUserInformation();
                     hideLoadingScreen();
-                    Toast.makeText(this, resource.data, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Successfully registered", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                     finish();
                 }

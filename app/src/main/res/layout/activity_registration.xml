@@ -18,7 +18,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/user_name"
             style="@style/EditTextStyle"
-            android:autofillHints="phone"
+            android:autofillHints="username"
             android:drawableStart="@drawable/ic_username"
             android:drawablePadding="10dp"
             android:inputType="textPersonName" />
