@@ -8,8 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fitareq.assessmentapphpl.R;
+import com.fitareq.assessmentapphpl.data.base.BaseActivity;
 import com.fitareq.assessmentapphpl.databinding.ActivityOtpBinding;
 import com.fitareq.assessmentapphpl.ui.registration.RegistrationActivity;
+import com.fitareq.assessmentapphpl.utils.AppConst;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -18,7 +20,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class OtpActivity extends AppCompatActivity {
+public class OtpActivity extends BaseActivity {
     private ActivityOtpBinding binding;
     private FirebaseAuth mAuth;
     private String verificationId;
@@ -30,15 +32,15 @@ public class OtpActivity extends AppCompatActivity {
         binding = ActivityOtpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
-        phone = getIntent().getStringExtra("phone");
+        phone = getIntent().getStringExtra(AppConst.KEY_USER_PHONE);
         binding.message.setText(getString(R.string.otp_send_message, phone));
         if (phone != null) {
             sendOtp(phone);
         }
 
         binding.continueBtn.setOnClickListener(view -> {
-            String otpCode = binding.otpView.getOtp();
-            if (otpCode != null && !otpCode.isEmpty()) {
+            String otpCode = binding.otpView.getText().toString();
+            if (!otpCode.isEmpty()) {
                 binding.continueBtn.setEnabled(false);
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otpCode);
                 signInWithCredential(credential);
@@ -49,6 +51,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private void sendOtp(String phone) {
+        showLoadingScreen();
         PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(mAuth)
                 .setPhoneNumber(phone)
                 .setTimeout(60L, TimeUnit.SECONDS)
@@ -62,14 +65,14 @@ public class OtpActivity extends AppCompatActivity {
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            if (phoneAuthCredential.getSmsCode() != null){
-                binding.otpView.setOTP(phoneAuthCredential.getSmsCode());
+            if (phoneAuthCredential.getSmsCode() != null) {
+                binding.otpView.setText(phoneAuthCredential.getSmsCode());
             }
             binding.continueBtn.setEnabled(false);
             Toast.makeText(OtpActivity.this, "Phone verified successfully.", Toast.LENGTH_SHORT).show();
             startActivity(
                     new Intent(OtpActivity.this, RegistrationActivity.class)
-                            .putExtra("phone", phone)
+                            .putExtra(AppConst.KEY_USER_PHONE, phone)
             );
             finish();
         }
@@ -83,6 +86,7 @@ public class OtpActivity extends AppCompatActivity {
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             verificationId = s;
+            hideLoadingScreen();
         }
     };
 
@@ -91,7 +95,7 @@ public class OtpActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Intent i = new Intent(OtpActivity.this, RegistrationActivity.class);
-                        i.putExtra("phone", phone);
+                        i.putExtra(AppConst.KEY_USER_PHONE, phone);
                         startActivity(i);
                         finish();
                     } else {

@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.fitareq.assessmentapphpl.R;
 import com.fitareq.assessmentapphpl.databinding.ActivityLoginBinding;
+import com.fitareq.assessmentapphpl.utils.AppConst;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                 phone = "+88"+phone;
             }
 
-            startActivity(new Intent(this, OtpActivity.class).putExtra("phone", phone));
+            startActivity(new Intent(this, OtpActivity.class).putExtra(AppConst.KEY_USER_PHONE, phone));
             this.finish();
         });
 

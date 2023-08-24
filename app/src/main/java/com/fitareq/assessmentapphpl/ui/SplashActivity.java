@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.fitareq.assessmentapphpl.R;
+import com.fitareq.assessmentapphpl.ui.main.MainActivity;
+import com.fitareq.assessmentapphpl.utils.AppConst;
 import com.fitareq.assessmentapphpl.utils.SharedPref;
 
 @SuppressLint("CustomSplashScreen")
@@ -19,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Handler handler = new Handler(getMainLooper());
         SharedPref sharedPref = new SharedPref();
-        String isLogged = sharedPref.getValueFromPref(this, "isLogged");
+        String isLogged = sharedPref.getValueFromPref(this, AppConst.IS_USER_LOGGED_IN);
 
         handler.postDelayed(() -> {
             if (isLogged == null || isLogged.equals("false")){
